@@ -1,10 +1,17 @@
 package com.tws.refactoring.extract_variable;
 
 public class PriceCalculator {
-    double getPrice(int quantity, int itemPrice) {
+
+    public static final int shippingCostMax = 500;
+    public static final double shippingDiscount = 0.05;
+    public static final double shippingDiscountMax = 100.0;
+    public static final double shppingRate = 0.1;
+
+    double getPgetrice(int quantity, int itemPrice) {
         // Price consists of: base price - discount + shipping cost
-        return quantity * itemPrice -
-                Math.max(0, quantity - 500) * itemPrice * 0.05 +
-                Math.min(quantity * itemPrice * 0.1, 100.0);
+        int basePrice = quantity * itemPrice;
+        double discount = Math.max(0, quantity - shippingCostMax) * itemPrice * shippingDiscount;
+        double shippingCost = Math.min(quantity * itemPrice * shppingRate, shippingDiscountMax);
+        return basePrice - discount + shippingCost;
     }
 }

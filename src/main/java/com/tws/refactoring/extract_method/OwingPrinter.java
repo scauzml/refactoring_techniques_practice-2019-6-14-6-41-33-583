@@ -8,22 +8,30 @@ import java.util.Vector;
 public class OwingPrinter {
     void printOwing(String name, List<Order> orders) {
         Iterator<Order> elements = orders.iterator();
+
         double outstanding = 0.0;
+        printBanner();
+        outstanding = getOutstanding(elements, outstanding);
+        printDetails("name: " + name, "amount: " + outstanding);
+    }
 
-        // print banner
-        System.out.println ("*****************************");
-        System.out.println ("****** Customer totals ******");
-        System.out.println ("*****************************");
+    public void printDetails(String s, String s2) {
+        System.out.println(s);
+        System.out.println(s2);
+    }
 
-        // print owings
+    public double getOutstanding(Iterator<Order> elements, double outstanding) {
         while (elements.hasNext()) {
             Order each = (Order) elements.next();
             outstanding += each.getAmount();
         }
+        return outstanding;
+    }
 
-        // print details
-        System.out.println("name: " + name);
-        System.out.println("amount: " + outstanding);
+    public void printBanner() {
+        // print banner
+        printDetails("*****************************", "****** Customer totals ******");
+        System.out.println ("*****************************");
     }
 }
 
